@@ -4,7 +4,15 @@ import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+import { UsersModule } from './users/users.module';
+import { CommentsModule } from './comments/comments.module';
+import { LikesModule } from './likes/likes.module';
+import { BoradsModule } from './borads/borads.module';
+import { BoardDatasModule } from './board-datas/board-datas.module';
+import { LocationsModule } from './locations/locations.module';
 import * as Joi from 'joi';
+import { UserEntity } from './users/users.entity';
+import { BoardEntity } from './borads/boards.entity';
 
 const typeOrmModuleOptions = {
   // 함수에 대한 모듈 설정
@@ -18,7 +26,7 @@ const typeOrmModuleOptions = {
     username: configService.get('DB_USERNAME'),
     password: configService.get('DB_PASSWORD'),
     database: configService.get('DB_NAME'),
-    entities: [],
+    entities: [UserEntity, BoardEntity],
     // db가 모두 지워졌다 생성됨, 배포 단계에서는 false로 설정하고 마이그레이션 해야함
     synchronize: true, //! set 'false' in production
     autoLoadEntities: true, // entity 가 자동으로 불러와짐
@@ -50,7 +58,12 @@ const typeOrmModuleOptions = {
       }),
     }),
     TypeOrmModule.forRootAsync(typeOrmModuleOptions),
-    // UsersModule,
+    UsersModule,
+    CommentsModule,
+    LikesModule,
+    BoradsModule,
+    BoardDatasModule,
+    LocationsModule,
   ],
   controllers: [AppController],
   providers: [],
