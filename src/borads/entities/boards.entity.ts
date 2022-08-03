@@ -1,4 +1,4 @@
-import { CommonEntity } from '../common/entities/common.entity'; // ormconfig.json에서 파싱 가능하도록 상대 경로로 지정
+import { CommonEntity } from '../../common/entities/common.entity'; // ormconfig.json에서 파싱 가능하도록 상대 경로로 지정
 import {
   Column,
   Entity,
@@ -10,8 +10,8 @@ import {
 } from 'typeorm';
 // import { VisitorEntity } from '../visitors/visitors.entity';
 import { UserEntity } from 'src/users/users.entity';
-import { BoardDataEntity } from 'src/board-datas/board-datas.entity';
-import { LocationEntity } from 'src/locations/locations.entity';
+import { BoardDataEntity } from 'src/borads/entities/board-datas.entity';
+import { LocationEntity } from 'src/borads/entities/locations.entity';
 // import { TagEntity } from 'src/tags/tags.entity';
 
 @Entity({

@@ -9,7 +9,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { UserEntity } from 'src/users/users.entity';
-import { BoardEntity } from 'src/borads/boards.entity';
+import { BoardEntity } from 'src/borads/entities/boards.entity';
 
 @Entity({
   // 테이블 명

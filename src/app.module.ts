@@ -8,15 +8,13 @@ import { UsersModule } from './users/users.module';
 import { CommentsModule } from './comments/comments.module';
 import { LikesModule } from './likes/likes.module';
 import { BoradsModule } from './borads/borads.module';
-import { BoardDatasModule } from './board-datas/board-datas.module';
-import { LocationsModule } from './locations/locations.module';
 import * as Joi from 'joi';
 import { UserEntity } from './users/users.entity';
-import { BoardEntity } from './borads/boards.entity';
+import { BoardEntity } from './borads/entities/boards.entity';
 import { CommentEntity } from './comments/comments.entity';
 import { LikeEntity } from './likes/likes.entity';
-import { LocationEntity } from './locations/locations.entity';
-import { BoardDataEntity } from './board-datas/board-datas.entity';
+import { LocationEntity } from './borads/entities/locations.entity';
+import { BoardDataEntity } from './borads/entities/board-datas.entity';
 
 const typeOrmModuleOptions = {
   // 함수에 대한 모듈 설정
@@ -41,7 +39,7 @@ const typeOrmModuleOptions = {
     // db가 모두 지워졌다 생성됨, 배포 단계에서는 false로 설정하고 마이그레이션 해야함
     synchronize: true, //! set 'false' in production
     autoLoadEntities: true, // entity 가 자동으로 불러와짐
-    logging: false,
+    logging: true,
     keepConnectionAlive: true, // 연결 될 때까지 시도
   }),
   // 의존성 주입, ConfigService.get 으로 환경변수 가져오기 위함
@@ -73,8 +71,6 @@ const typeOrmModuleOptions = {
     CommentsModule,
     LikesModule,
     BoradsModule,
-    BoardDatasModule,
-    LocationsModule,
   ],
   controllers: [AppController],
   providers: [],

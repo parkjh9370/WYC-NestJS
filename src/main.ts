@@ -8,7 +8,8 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import * as expressBasicAuth from 'express-basic-auth';
-import { HttpApiExceptionFilter } from './common/exceptions/http-api-exception.filter';
+import { HttpExceptionFilter } from './common/exceptions/http-api-exception.filter';
+import * as path from 'path';
 
 class Application {
   private logger = new Logger(Application.name);
@@ -26,7 +27,7 @@ class Application {
     this.PORT = process.env.PORT || '8000';
     this.corsOriginList = process.env.CORS_ORIGIN_LIST
       ? process.env.CORS_ORIGIN_LIST.split(',').map((origin) => origin.trim())
-      : ['*']; // 허용할 주소
+      : ['http://localhost:3000']; // 허용할 주소
     this.ADMIN_USER = process.env.ADMIN_USER;
     this.ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
   }
@@ -42,6 +43,14 @@ class Application {
       }),
     );
   }
+
+  private setUseStaticAssets() {
+    this.server.useStaticAssets(path.join(__dirname, './common', 'uploads'), {
+      // 경로에 media 추가
+      prefix: '/media',
+    });
+  }
+  // http://localhost:8000/media/cats/aaa.png
 
   private setUpOpenAPIMiddleware() {
     SwaggerModule.setup(
@@ -63,6 +72,7 @@ class Application {
       origin: this.corsOriginList,
       credentials: true,
     });
+    this.setUseStaticAssets();
     this.setUpBasicAuth();
     this.setUpOpenAPIMiddleware();
     this.server.useGlobalPipes(
@@ -74,7 +84,7 @@ class Application {
     this.server.useGlobalInterceptors(
       new ClassSerializerInterceptor(this.server.get(Reflector)),
     );
-    this.server.useGlobalFilters(new HttpApiExceptionFilter());
+    this.server.useGlobalFilters(new HttpExceptionFilter());
   }
 
   async boostrap() {

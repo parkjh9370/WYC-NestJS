@@ -1,4 +1,4 @@
-import { CommonEntity } from '../common/entities/common.entity'; // ormconfig.json에서 파싱 가능하도록 상대 경로로 지정
+import { CommonEntity } from '../../common/entities/common.entity'; // ormconfig.json에서 파싱 가능하도록 상대 경로로 지정
 import {
   Column,
   Entity,
@@ -9,28 +9,31 @@ import {
   OneToMany,
 } from 'typeorm';
 import { UserEntity } from 'src/users/users.entity';
-import { BoardEntity } from 'src/borads/boards.entity';
+import { BoardEntity } from 'src/borads/entities/boards.entity';
 
 @Entity({
   // 테이블 명
-  name: 'locations',
+  name: 'boardDatas',
 })
 // CommonEntitiy 상속
-export class LocationEntity extends CommonEntity {
+export class BoardDataEntity extends CommonEntity {
   @Column({ type: 'varchar', nullable: false })
-  latitude: string;
+  area: string;
 
   @Column({ type: 'varchar', nullable: false })
-  longitude: string;
+  wifi: string;
+
+  @Column({ type: 'varchar', nullable: false })
+  parking: string;
 
   @Column({ type: 'varchar', nullable: true })
-  roadAdd: string;
+  electricity: string;
 
   @Column({ type: 'varchar', nullable: true })
-  lotAdd: string;
+  toiletType: string;
 
   //* Relation */
-  @ManyToOne(() => BoardEntity, (board: BoardEntity) => board.location, {
+  @ManyToOne(() => BoardEntity, (board: BoardEntity) => board.boardData, {
     onDelete: 'CASCADE', // 사용자가 삭제되면 블로그도 삭제된다.
   })
   @JoinColumn([

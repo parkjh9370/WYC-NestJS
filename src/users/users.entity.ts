@@ -1,4 +1,4 @@
-import { BoardEntity } from './../borads/boards.entity';
+import { BoardEntity } from '../borads/entities/boards.entity';
 import { IsBoolean, IsEmail, IsNotEmpty, IsString } from 'class-validator';
 import { CommonEntity } from '../common/entities/common.entity'; // ormconfig.json에서 파싱 가능하도록 상대 경로로 지정
 import {
@@ -23,7 +23,7 @@ export class UserEntity extends CommonEntity {
   @Column({ type: 'varchar', unique: true, nullable: false })
   email: string;
 
-  @Exclude() // 최종 결과물 받을 때 해당 엔티티 빼준다.
+  // @Exclude() // 최종 결과물 받을 때 해당 엔티티 빼준다.
   @IsNotEmpty({ message: '비밀번호를 작성해주세요.' })
   @Column({ type: 'varchar', nullable: false })
   password: string;
@@ -39,11 +39,15 @@ export class UserEntity extends CommonEntity {
   nickname: string;
 
   @IsString()
-  @Column({ type: 'varchar', nullable: true })
+  @Column({
+    type: 'varchar',
+    default:
+      'https://raw.githubusercontent.com/amamov/teaching-nestjs-a-to-z/main/images/1.jpeg',
+  })
   profile: string;
 
   @IsString()
-  @Column({ type: 'varchar', nullable: true })
+  @Column({ type: 'varchar', default: 'local' })
   provider: string;
 
   @IsString()
