@@ -10,6 +10,8 @@ import {
 } from 'typeorm';
 // import { VisitorEntity } from '../visitors/visitors.entity';
 import { UserEntity } from 'src/users/users.entity';
+import { BoardDataEntity } from 'src/board-datas/board-datas.entity';
+import { LocationEntity } from 'src/locations/locations.entity';
 // import { TagEntity } from 'src/tags/tags.entity';
 
 @Entity({
@@ -31,18 +33,35 @@ export class BoardEntity extends CommonEntity {
   rating: number;
 
   //* Relation */
-
   @ManyToOne(() => UserEntity, (user: UserEntity) => user.board, {
     onDelete: 'CASCADE', // 사용자가 삭제되면 블로그도 삭제된다.
   })
   @JoinColumn([
     // foreignkey 정보들, 연결도 UserEntity 에 대한 정보들을 명시해준다.
     {
-      name: 'user_id' /* db에 저장되는 필드 이름 */,
+      name: 'userId' /* db에 저장되는 필드 이름 */,
       referencedColumnName: 'id' /* USER의 id */,
     },
   ])
   user: UserEntity;
+
+  @OneToMany(
+    () => BoardDataEntity,
+    (boardData: BoardDataEntity) => boardData.board,
+    {
+      cascade: true, // 사용자를 통해 블로그가 추가, 수정, 삭제되고 사용자가 저장되면 추가된 블로그도 저장된다.
+    },
+  )
+  boardData: BoardDataEntity[];
+
+  @OneToMany(
+    () => LocationEntity,
+    (location: LocationEntity) => location.board,
+    {
+      cascade: true, // 사용자를 통해 블로그가 추가, 수정, 삭제되고 사용자가 저장되면 추가된 블로그도 저장된다.
+    },
+  )
+  location: LocationEntity[];
 
   //   @ManyToMany(() => TagEntity, (tag: TagEntity) => tag.blogs, {
   //     cascade: true, // 블로그를 통해 태그가 추가, 수정, 삭제되고 블로그를 저장하면 태그도 저장된다.
