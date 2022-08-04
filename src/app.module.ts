@@ -1,4 +1,9 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import {
+  HttpModule,
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -20,6 +25,7 @@ import { LikesModule } from './likes/likes.module';
 import { LikeEntity } from './likes/likes.entity';
 import { CommentsModule } from './comments/comments.module';
 import { ListsModule } from './lists/lists.module';
+import { OauthModule } from './oauth/oauth.module';
 
 const typeOrmModuleOptions = {
   // 함수에 대한 모듈 설정
@@ -77,6 +83,7 @@ const typeOrmModuleOptions = {
     LikesModule,
     CommentsModule,
     ListsModule,
+    OauthModule,
   ],
   controllers: [AppController],
   providers: [],

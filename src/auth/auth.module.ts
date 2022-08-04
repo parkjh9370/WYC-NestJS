@@ -1,3 +1,4 @@
+import { OauthModule } from './../oauth/oauth.module';
 import { ConfigModule } from '@nestjs/config';
 import { forwardRef, Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
@@ -27,6 +28,7 @@ import { CommentsModule } from 'src/comments/comments.module';
     forwardRef(() => BoradsModule),
     forwardRef(() => LikesModule),
     forwardRef(() => CommentsModule),
+    forwardRef(() => OauthModule),
   ],
   providers: [AuthService, JwtStrategy],
   exports: [AuthService],

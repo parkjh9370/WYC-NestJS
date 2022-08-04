@@ -24,22 +24,22 @@ import { CommentEntity } from 'src/comments/comments.entity';
 export class UserEntity extends CommonEntity {
   @IsEmail({}, { message: '올바른 이메일을 작성해주세요.' })
   @IsNotEmpty({ message: '이메일을 작성해주세요.' })
-  @Column({ type: 'varchar', unique: true, nullable: false })
+  @Column({ type: 'varchar', unique: true, nullable: true })
   email: string;
 
   // @Exclude() // 최종 결과물 받을 때 해당 엔티티 빼준다.
   @IsNotEmpty({ message: '비밀번호를 작성해주세요.' })
-  @Column({ type: 'varchar', nullable: false })
+  @Column({ type: 'varchar', nullable: true })
   password: string;
 
   @IsString()
   @IsNotEmpty({ message: '이름을 작성해주세요.' })
-  @Column({ type: 'varchar', nullable: false })
+  @Column({ type: 'varchar', nullable: true })
   name: string;
 
   @IsString()
   @IsNotEmpty({ message: '닉네임을 작성해주세요.' })
-  @Column({ type: 'varchar', nullable: false })
+  @Column({ type: 'varchar', nullable: true })
   nickname: string;
 
   @IsString()

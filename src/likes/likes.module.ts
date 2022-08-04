@@ -10,7 +10,7 @@ import { LikesService } from './likes.service';
 @Module({
   imports: [
     TypeOrmModule.forFeature([UserEntity, BoardEntity, LikeEntity]),
-    forwardRef(() => AuthModule),
+    // forwardRef(() => AuthModule),
   ],
   controllers: [LikesController],
   providers: [LikesService],
