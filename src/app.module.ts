@@ -9,10 +9,17 @@ import { BoradsModule } from './borads/borads.module';
 import * as Joi from 'joi';
 import { UserEntity } from './users/users.entity';
 import { BoardEntity } from './borads/entities/boards.entity';
-import { CommentEntity } from './users/comments.entity';
-import { LikeEntity } from './users/likes.entity';
+import { CommentEntity } from './comments/comments.entity';
+// import { LikeEntity } from './likes/likes.entity';
 import { LocationEntity } from './borads/entities/locations.entity';
 import { BoardDataEntity } from './borads/entities/board-datas.entity';
+
+// import { LikeEntity } from './likes/likes.entity';
+import { LikesController } from './likes/likes.controller';
+import { LikesModule } from './likes/likes.module';
+import { LikeEntity } from './likes/likes.entity';
+import { CommentsModule } from './comments/comments.module';
+import { ListsModule } from './lists/lists.module';
 
 const typeOrmModuleOptions = {
   // 함수에 대한 모듈 설정
@@ -67,6 +74,9 @@ const typeOrmModuleOptions = {
     TypeOrmModule.forRootAsync(typeOrmModuleOptions),
     UsersModule,
     BoradsModule,
+    LikesModule,
+    CommentsModule,
+    ListsModule,
   ],
   controllers: [AppController],
   providers: [],

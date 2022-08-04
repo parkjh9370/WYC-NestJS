@@ -46,7 +46,7 @@ export class BoardsService {
       rating,
       user.id,
     );
-    console.log(board);
+    // console.log(board);
     // return;
     return { boardId: board, message: '게시물 생성이 완료되었습니다.' };
   }

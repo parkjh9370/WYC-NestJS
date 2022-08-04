@@ -6,10 +6,14 @@ import {
   Entity,
   Index,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   OneToMany,
   OneToOne,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
+import { LikeEntity } from 'src/likes/likes.entity';
+import { CommentEntity } from 'src/comments/comments.entity';
 // import { BlogEntity } from '../blogs/blogs.entity';
 // import { ProfileEntity } from '../profiles/profiles.entity';
 
@@ -41,8 +45,7 @@ export class UserEntity extends CommonEntity {
   @IsString()
   @Column({
     type: 'varchar',
-    default:
-      'https://raw.githubusercontent.com/amamov/teaching-nestjs-a-to-z/main/images/1.jpeg',
+    default: 'http://localhost:8000/media/image/defalut1659601515523.png',
   })
   profile: string;
 
@@ -67,6 +70,33 @@ export class UserEntity extends CommonEntity {
     cascade: true, // 사용자를 통해 블로그가 추가, 수정, 삭제되고 사용자가 저장되면 추가된 블로그도 저장된다.
   })
   board: BoardEntity[];
+
+  @OneToMany(() => LikeEntity, (like: LikeEntity) => like.user, {
+    cascade: true, // 사용자를 통해 블로그가 추가, 수정, 삭제되고 사용자가 저장되면 추가된 블로그도 저장된다.
+  })
+  like: LikeEntity[];
+
+  @OneToMany(() => CommentEntity, (comment: CommentEntity) => comment.user, {
+    cascade: true, // 사용자를 통해 블로그가 추가, 수정, 삭제되고 사용자가 저장되면 추가된 블로그도 저장된다.
+  })
+  comment: CommentEntity[];
+
+  // @ManyToMany(() => BoardEntity, (board: BoardEntity) => board.users, {
+  //   cascade: true, // 블로그를 통해 태그가 추가, 수정, 삭제되고 블로그를 저장하면 태그도 저장된다.
+  // })
+  // @JoinTable({
+  //   // table
+  //   name: 'likes',
+  //   joinColumn: {
+  //     name: 'userId',
+  //     referencedColumnName: 'id', // 자기 자신의 id
+  //   },
+  //   inverseJoinColumn: {
+  //     name: 'boardId',
+  //     referencedColumnName: 'id',
+  //   },
+  // })
+  // boards: BoardEntity[];
 }
 
 /*

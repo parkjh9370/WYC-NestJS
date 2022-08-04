@@ -6,6 +6,9 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { UsersModule } from 'src/users/users.module';
 import { UsersRepository } from 'src/users/users.repository';
+import { BoradsModule } from 'src/borads/borads.module';
+import { LikesModule } from 'src/likes/likes.module';
+import { CommentsModule } from 'src/comments/comments.module';
 
 @Module({
   imports: [
@@ -21,6 +24,9 @@ import { UsersRepository } from 'src/users/users.repository';
     }),
     // 순환 모듈 참조 문제 해결
     forwardRef(() => UsersModule),
+    forwardRef(() => BoradsModule),
+    forwardRef(() => LikesModule),
+    forwardRef(() => CommentsModule),
   ],
   providers: [AuthService, JwtStrategy],
   exports: [AuthService],

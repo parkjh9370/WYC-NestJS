@@ -12,6 +12,8 @@ import {
 import { UserEntity } from 'src/users/users.entity';
 import { BoardDataEntity } from 'src/borads/entities/board-datas.entity';
 import { LocationEntity } from 'src/borads/entities/locations.entity';
+import { LikeEntity } from 'src/likes/likes.entity';
+import { CommentEntity } from 'src/comments/comments.entity';
 // import { TagEntity } from 'src/tags/tags.entity';
 
 @Entity({
@@ -62,6 +64,19 @@ export class BoardEntity extends CommonEntity {
     },
   )
   location: LocationEntity[];
+
+  @OneToMany(() => LikeEntity, (like: LikeEntity) => like.board, {
+    cascade: true, // 사용자를 통해 블로그가 추가, 수정, 삭제되고 사용자가 저장되면 추가된 블로그도 저장된다.
+  })
+  like: LikeEntity[];
+
+  @OneToMany(() => CommentEntity, (comment: CommentEntity) => comment.board, {
+    cascade: true, // 사용자를 통해 블로그가 추가, 수정, 삭제되고 사용자가 저장되면 추가된 블로그도 저장된다.
+  })
+  comment: CommentEntity[];
+
+  // @ManyToMany(() => UserEntity, (user: UserEntity) => user.boards)
+  // users: UserEntity[];
 
   //   @ManyToMany(() => TagEntity, (tag: TagEntity) => tag.blogs, {
   //     cascade: true, // 블로그를 통해 태그가 추가, 수정, 삭제되고 블로그를 저장하면 태그도 저장된다.

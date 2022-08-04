@@ -1,6 +1,7 @@
 import { LocationEntity } from 'src/borads/entities/locations.entity';
 import {
   Body,
+  Query,
   Controller,
   Get,
   Param,
@@ -36,7 +37,7 @@ export class BoardsController {
     @InjectRepository(BoardEntity)
     private readonly boardEntitiy: Repository<BoardEntity>,
     @InjectRepository(BoardDataEntity)
-    private readonly boardDataEntity: Repository<BoardDataEntity>,
+    private readonly boardEntity: Repository<BoardDataEntity>,
     @InjectRepository(LocationEntity)
     private readonly LocationEntity: Repository<LocationEntity>,
     private readonly authService: AuthService,
@@ -48,17 +49,9 @@ export class BoardsController {
   // 사진 업로드 갯수 제한
   // 파일 업로드 조건(upload/cats 라는 폴더에 사진 파일 저장)
   @UseInterceptors(FileInterceptor('image', multerOptions('image')))
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Post('img')
-  uploadBoardImg(
-    @UploadedFile() files: Express.Multer.File,
-    // @CurrentUser() user,
-  ) {
-    // console.log(user);
-    // console.log(files.filename);
-    // return { image: `http://localhost:8000/media/cats/${files[0].filename}` };
-    // return this.boardsService.uploadImg(user, files);
-    // 현재 url 경로를 return 해준다.
+  uploadBoardImg(@UploadedFile() files: Express.Multer.File) {
     return { location: `http://localhost:8000/media/image/${files.filename}` };
   }
 
@@ -70,10 +63,10 @@ export class BoardsController {
     return this.boardsService.postBoard(user, data);
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get(':id')
   async getDetailBoard(@CurrentUser() user, @Param('id') id: string) {
-    console.log(id);
+    // console.log(id);
 
     // const entityManager = getManager();
     // const [data] = await entityManager.query(
@@ -83,22 +76,66 @@ export class BoardsController {
     // );
     // console.log(data);
 
-    // const boardData = getRepository(BoardEntity)
+    // const board = getRepository(BoardEntity)
     //   .createQueryBuilder('board')
     //   .leftJoinAndSelect('board.userId', 'userId')
     //   .where('board.id = :id', { id })
     //   .getOne();
 
-    // const boardData = await getRepository(BoardEntity)
+    // const board = await getRepository(BoardEntity)
     //   .createQueryBuilder('board')
     //   .where('board.id = :id', { id: id })
     //   .getOne();
 
-    // const boardData = await getRepository(UserEntity)
+    // const board = await getRepository(UserEntity)
     //   .createQueryBuilder('user')
     //   .leftJoinAndSelect('user.boards', 'boards')
     //   .where('boards.id = :id', { id: id })
     //   .getOne();
-    // console.log(boardData);
+    // console.log(board);
+
+    const boardQuery = await getRepository(BoardEntity)
+      .createQueryBuilder('board')
+      .where({ id: id })
+      .select([
+        'board.id',
+        'user.nickname',
+        'user.profile',
+        'board.title',
+        'board.content',
+        'board.picture',
+        'board.rating',
+        'board.createdAt',
+      ])
+      .leftJoin('board.user', 'user')
+      .getOne();
+
+    const board = {
+      ...boardQuery,
+      nickname: `${boardQuery.user.nickname}`,
+      profile: `${boardQuery.user.profile}`,
+    };
+
+    // console.log(board);
+
+    const boardData = await getRepository(BoardDataEntity).findOne({
+      where: { board: id },
+    });
+
+    const findLocation = await getRepository(LocationEntity).findOne({
+      where: { board: id },
+    });
+
+    // console.log(findLocation);
+
+    const location = {
+      id: findLocation.id,
+      latitude: parseFloat(findLocation.latitude),
+      longitude: parseFloat(findLocation.longitude),
+      roadAdd: findLocation.roadAdd,
+      lotAdd: findLocation.lotAdd,
+    };
+
+    return { board, boardData, location, message: '게시물을 가져왔습니다.' };
   }
 }
