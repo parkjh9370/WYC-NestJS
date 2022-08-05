@@ -1,3 +1,29 @@
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+
+export class AddPostDTO {
+  @IsString()
+  @IsNotEmpty()
+  title: string;
+
+  @IsString()
+  @IsNotEmpty()
+  content: string;
+
+  @IsString()
+  @IsNotEmpty()
+  picture: string;
+
+  @IsNotEmpty()
+  location: Location;
+
+  @IsNotEmpty()
+  siteInfo: SiteInfo;
+
+  @IsNumber()
+  @IsNotEmpty()
+  rating: number;
+}
+
 export interface Location {
   latitude: string;
   longitude: string;
@@ -11,13 +37,4 @@ export interface SiteInfo {
   parking: string;
   electronic: string;
   toilet: string;
-}
-
-export interface AddPostDTO {
-  title: string;
-  content: string;
-  picture: string;
-  location: Location;
-  siteInfo: SiteInfo;
-  rating: number;
 }

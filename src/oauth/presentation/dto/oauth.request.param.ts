@@ -1,7 +1,7 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 
-export class LikeBoardId {
+export class OauthRequestQuery {
   @IsString()
   @IsNotEmpty()
-  id: string;
+  code: string;
 }

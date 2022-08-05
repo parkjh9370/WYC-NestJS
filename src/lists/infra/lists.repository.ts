@@ -19,7 +19,7 @@ export class ListRepository {
       skip: (pages - 1) * 12,
       take: limit,
       order: {
-        id: 'DESC',
+        createdAt: 'DESC',
       },
     });
   }
@@ -38,7 +38,7 @@ export class ListRepository {
       skip: (pages - 1) * 12,
       take: limit,
       order: {
-        id: 'DESC',
+        createdAt: 'DESC',
       },
     });
   }

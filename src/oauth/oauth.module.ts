@@ -5,6 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from 'src/auth/auth.module';
 import { OauthController } from './presentation/oauth.controller';
 import { UserEntity } from 'src/users/infra/entity/users.entity';
+import { OauthService } from './application/oauth.service';
+import { OauthRepository } from './infra/oauth.repository';
 
 @Module({
   imports: [
@@ -19,7 +21,7 @@ import { UserEntity } from 'src/users/infra/entity/users.entity';
     }),
   ],
   controllers: [OauthController],
-  providers: [],
+  providers: [OauthService, OauthRepository],
   exports: [],
 })
 export class OauthModule {}
