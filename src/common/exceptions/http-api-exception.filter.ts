@@ -23,6 +23,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     // 응답값 형태
     // 직접 인자값에 넣은 에러 (라우터 자체적인 에러)
+    // new UnauthorizedException
     if (typeof error === 'string') {
       response.status(status).json({
         success: false,
@@ -30,6 +31,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
         path: request.url,
         error,
       });
+      // 그렇지 않을 경우 지정되어 있는 statuCode와 메세지 리턴한다.
     } else {
       response.status(status).json({
         success: false,

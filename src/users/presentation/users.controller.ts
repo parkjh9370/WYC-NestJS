@@ -30,10 +30,10 @@ export class UsersController {
 
   @ApiResponse({
     status: 500,
-    description: 'Server error...',
+    description: 'Server error',
   })
   @ApiResponse({
-    status: 200,
+    status: 201,
     description: '회원가입 성공!',
     type: SignUpResponseDto,
   })
@@ -43,12 +43,32 @@ export class UsersController {
     return this.usersService.registerUser(userRegisterDTO);
   }
 
+  @ApiResponse({
+    status: 500,
+    description: 'Server error',
+  })
+  @ApiResponse({
+    status: 201,
+    description: '로그인 성공',
+  })
   @ApiOperation({ summary: '로그인 ' })
   @Post('login')
   login(@Body() data: LoginRequestDto) {
     return this.authService.jwtLogin(data);
   }
 
+  @ApiResponse({
+    status: 500,
+    description: 'Server error',
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized',
+  })
+  @ApiResponse({
+    status: 201,
+    description: '인증완료',
+  })
   @ApiOperation({ summary: '인증 ' })
   @UseGuards(JwtAuthGuard)
   @Post('token/validate')
