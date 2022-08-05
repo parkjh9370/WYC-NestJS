@@ -12,13 +12,13 @@ import { HttpExceptionFilter } from 'src/common/exceptions/http-api-exception.fi
 import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
 import { UserRegisterDTO } from './dto/user-register.dto';
 import { SignUpResponseDto } from './dto/user-register-response.dto';
-import { UsersService } from './users.service';
+import { UsersService } from '../application/users.service';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from './users.entity';
+import { UserEntity } from '../infra/entity/users.entity';
 import { Repository } from 'typeorm';
 import { LoginRequestDto } from 'src/auth/dto/login.request.dto';
 import { AuthService } from 'src/auth/auth.service';
-import { JwtAuthGuard } from './../auth/jwt/jwt.guard';
+import { JwtAuthGuard } from '../../auth/jwt/jwt.guard';
 import { CurrentUser } from 'src/common/decorators/user.decorator';
 
 @Controller('auth')

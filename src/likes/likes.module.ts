@@ -1,11 +1,12 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from 'src/auth/auth.module';
-import { BoardEntity } from 'src/borads/entities/boards.entity';
-import { UserEntity } from 'src/users/users.entity';
-import { LikesController } from './likes.controller';
-import { LikeEntity } from './likes.entity';
-import { LikesService } from './likes.service';
+import { BoardEntity } from 'src/borads/infra/entities/boards.entity';
+import { UserEntity } from 'src/users/infra/entity/users.entity';
+// import { LikesController } from './likes.controller';
+import { LikeEntity } from './infra/entity/likes.entity';
+import { LikesService } from './application/likes.service';
+import { LikesController } from './presentation/likes.controller';
 
 @Module({
   imports: [

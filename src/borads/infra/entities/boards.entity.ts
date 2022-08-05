@@ -1,4 +1,4 @@
-import { CommonEntity } from '../../common/entities/common.entity'; // ormconfig.json에서 파싱 가능하도록 상대 경로로 지정
+import { CommonEntity } from '../../../common/entities/common.entity'; // ormconfig.json에서 파싱 가능하도록 상대 경로로 지정
 import {
   Column,
   Entity,
@@ -9,11 +9,11 @@ import {
   OneToMany,
 } from 'typeorm';
 // import { VisitorEntity } from '../visitors/visitors.entity';
-import { UserEntity } from 'src/users/users.entity';
-import { BoardDataEntity } from 'src/borads/entities/board-datas.entity';
-import { LocationEntity } from 'src/borads/entities/locations.entity';
-import { LikeEntity } from 'src/likes/likes.entity';
-import { CommentEntity } from 'src/comments/comments.entity';
+import { UserEntity } from 'src/users/infra/entity/users.entity';
+import { BoardDataEntity } from 'src/borads/infra/entities/board-datas.entity';
+import { LocationEntity } from 'src/borads/infra/entities/locations.entity';
+import { LikeEntity } from 'src/likes/infra/entity/likes.entity';
+import { CommentEntity } from 'src/comments/infra/entity/comments.entity';
 // import { TagEntity } from 'src/tags/tags.entity';
 
 @Entity({

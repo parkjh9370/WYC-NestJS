@@ -6,13 +6,13 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { BoardDataEntity } from 'src/borads/entities/board-datas.entity';
-import { BoardEntity } from 'src/borads/entities/boards.entity';
-import { CommentEntity } from 'src/comments/comments.entity';
+import { BoardDataEntity } from 'src/borads/infra/entities/board-datas.entity';
+import { BoardEntity } from 'src/borads/infra/entities/boards.entity';
+import { CommentEntity } from 'src/comments/infra/entity/comments.entity';
 import { HttpExceptionFilter } from 'src/common/exceptions/http-api-exception.filter';
 import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
-import { LikeEntity } from 'src/likes/likes.entity';
-import { UserEntity } from 'src/users/users.entity';
+import { LikeEntity } from 'src/likes/infra/entity/likes.entity';
+import { UserEntity } from 'src/users/infra/entity/users.entity';
 import { getRepository, Repository } from 'typeorm';
 
 @Controller('main')

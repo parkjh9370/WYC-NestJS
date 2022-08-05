@@ -14,9 +14,9 @@ import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
 import { CurrentUser } from 'src/common/decorators/user.decorator';
 import { HttpExceptionFilter } from 'src/common/exceptions/http-api-exception.filter';
 import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
-import { LikeEntity } from './likes.entity';
-import { LikesService } from './likes.service';
 import { getRepository, Repository } from 'typeorm';
+import { LikeEntity } from '../infra/entity/likes.entity';
+import { LikesService } from '../application/likes.service';
 
 @Controller('likes')
 @UseGuards(JwtAuthGuard)

@@ -1,4 +1,4 @@
-import { LocationEntity } from 'src/borads/entities/locations.entity';
+import { LocationEntity } from 'src/borads/infra/entities/locations.entity';
 import {
   Body,
   Query,
@@ -21,10 +21,10 @@ import { CurrentUser } from 'src/common/decorators/user.decorator';
 import { HttpExceptionFilter } from 'src/common/exceptions/http-api-exception.filter';
 import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
 import { multerOptions } from 'src/common/utills/multer.options';
-import { UserEntity } from 'src/users/users.entity';
-import { BoardsService } from './boards.service';
-import { BoardDataEntity } from './entities/board-datas.entity';
-import { BoardEntity } from './entities/boards.entity';
+import { UserEntity } from 'src/users/infra/entity/users.entity';
+import { BoardsService } from '../application/boards.service';
+import { BoardDataEntity } from '../infra/entities/board-datas.entity';
+import { BoardEntity } from '../infra/entities/boards.entity';
 import { getManager, getRepository, Repository } from 'typeorm';
 
 @Controller('boards')

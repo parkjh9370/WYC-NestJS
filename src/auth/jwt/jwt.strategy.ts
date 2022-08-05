@@ -1,8 +1,8 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
+import { UsersRepository } from 'src/users/infra/users.repository';
 import { Payload } from './jwt.payload';
-import { UsersRepository } from 'src/users/users.repository';
 
 // 인증
 @Injectable()

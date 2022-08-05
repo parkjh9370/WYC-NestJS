@@ -8,8 +8,8 @@ import {
   OneToMany,
   OneToOne,
 } from 'typeorm';
-import { UserEntity } from 'src/users/users.entity';
-import { BoardEntity } from 'src/borads/entities/boards.entity';
+import { UserEntity } from 'src/users/infra/entity/users.entity';
+import { BoardEntity } from 'src/borads/infra/entities/boards.entity';
 import { CommonEntity } from 'src/common/entities/common.entity';
 
 @Entity({

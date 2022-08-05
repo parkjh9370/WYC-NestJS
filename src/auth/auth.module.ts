@@ -6,7 +6,7 @@ import { JwtStrategy } from './jwt/jwt.strategy';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { UsersModule } from 'src/users/users.module';
-import { UsersRepository } from 'src/users/users.repository';
+import { UsersRepository } from 'src/users/infra/users.repository';
 import { BoradsModule } from 'src/borads/borads.module';
 import { LikesModule } from 'src/likes/likes.module';
 import { CommentsModule } from 'src/comments/comments.module';

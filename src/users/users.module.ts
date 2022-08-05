@@ -1,10 +1,10 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from 'src/auth/auth.module';
-import { UsersController } from './users.controller';
-import { UserEntity } from './users.entity';
-import { UsersRepository } from './users.repository';
-import { UsersService } from './users.service';
+import { UsersController } from './presentation/users.controller';
+import { UserEntity } from './infra/entity/users.entity';
+import { UsersRepository } from './infra/users.repository';
+import { UsersService } from './application/users.service';
 
 @Module({
   imports: [

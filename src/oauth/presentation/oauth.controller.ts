@@ -8,7 +8,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { HttpExceptionFilter } from 'src/common/exceptions/http-api-exception.filter';
 import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
-import { UserEntity } from 'src/users/users.entity';
+import { UserEntity } from 'src/users/infra/entity/users.entity';
 import { Repository } from 'typeorm';
 import axios, { AxiosResponse } from 'axios';
 import { JwtService } from '@nestjs/jwt';

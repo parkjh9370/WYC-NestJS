@@ -13,12 +13,12 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { HttpExceptionFilter } from 'src/common/exceptions/http-api-exception.filter';
 import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
-import { CommentEntity } from './comments.entity';
 import { getRepository, Repository } from 'typeorm';
-import { CommentService } from './comments.service';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
 import { CurrentUser } from 'src/common/decorators/user.decorator';
-import { BoardEntity } from 'src/borads/entities/boards.entity';
+import { BoardEntity } from 'src/borads/infra/entities/boards.entity';
+import { CommentEntity } from '../infra/entity/comments.entity';
+import { CommentService } from '../application/comments.service';
 
 @Controller('comments')
 @UseInterceptors(SuccessInterceptor)

@@ -1,11 +1,11 @@
-import { LocationEntity } from './entities/locations.entity';
+import { LocationEntity } from '../infra/entities/locations.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { UserEntity } from 'src/users/users.entity';
-import { BoardEntity } from './entities/boards.entity';
-import { BoardDataEntity } from './entities/board-datas.entity';
-import { BoardsRepository } from './boards.repository';
+import { UserEntity } from 'src/users/infra/entity/users.entity';
+import { BoardEntity } from '../infra/entities/boards.entity';
+import { BoardDataEntity } from '../infra/entities/board-datas.entity';
+import { BoardsRepository } from '../infra/boards.repository';
 
 @Injectable()
 export class BoardsService {

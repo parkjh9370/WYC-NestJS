@@ -3,7 +3,7 @@ import { BoardEntity } from './entities/boards.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { UserEntity } from './../users/users.entity';
+import { UserEntity } from '../../users/infra/entity/users.entity';
 import { BoardDataEntity } from './entities/board-datas.entity';
 
 @Injectable()

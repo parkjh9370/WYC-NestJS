@@ -1,6 +1,6 @@
-import { BoardEntity } from '../borads/entities/boards.entity';
+import { BoardEntity } from '../../../borads/infra/entities/boards.entity';
 import { IsBoolean, IsEmail, IsNotEmpty, IsString } from 'class-validator';
-import { CommonEntity } from '../common/entities/common.entity'; // ormconfig.json에서 파싱 가능하도록 상대 경로로 지정
+import { CommonEntity } from '../../../common/entities/common.entity'; // ormconfig.json에서 파싱 가능하도록 상대 경로로 지정
 import {
   Column,
   Entity,
@@ -12,8 +12,8 @@ import {
   OneToOne,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
-import { LikeEntity } from 'src/likes/likes.entity';
-import { CommentEntity } from 'src/comments/comments.entity';
+import { LikeEntity } from 'src/likes/infra/entity/likes.entity';
+import { CommentEntity } from 'src/comments/infra/entity/comments.entity';
 // import { BlogEntity } from '../blogs/blogs.entity';
 // import { ProfileEntity } from '../profiles/profiles.entity';
 
