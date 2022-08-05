@@ -6,6 +6,7 @@ import { UserEntity } from '../infra/entity/users.entity';
 
 import * as bcrypt from 'bcrypt';
 import { UsersRepository } from '../infra/users.repository';
+import { NowUser } from 'src/auth/dto/user.validated.dto';
 
 @Injectable()
 export class UsersService {
@@ -31,5 +32,9 @@ export class UsersService {
     });
 
     return { message: '회원가입 성공!' };
+  }
+
+  async userValidate(user: NowUser) {
+    return { valid: true, user };
   }
 }

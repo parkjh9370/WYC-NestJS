@@ -1,9 +1,4 @@
-import {
-  HttpModule,
-  MiddlewareConsumer,
-  Module,
-  NestModule,
-} from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -15,12 +10,8 @@ import * as Joi from 'joi';
 import { UserEntity } from './users/infra/entity/users.entity';
 import { BoardEntity } from './borads/infra/entities/boards.entity';
 import { CommentEntity } from './comments/infra/entity/comments.entity';
-// import { LikeEntity } from './likes/likes.entity';
 import { LocationEntity } from './borads/infra/entities/locations.entity';
 import { BoardDataEntity } from './borads/infra/entities/board-datas.entity';
-
-// import { LikeEntity } from './likes/likes.entity';
-// import { LikesController } from './likes/likes.controller';
 import { LikesModule } from './likes/likes.module';
 import { LikeEntity } from './likes/infra/entity/likes.entity';
 import { CommentsModule } from './comments/comments.module';

@@ -13,13 +13,11 @@ import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor'
 import { UserRegisterDTO } from './dto/user-register.dto';
 import { SignUpResponseDto } from './dto/user-register-response.dto';
 import { UsersService } from '../application/users.service';
-import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from '../infra/entity/users.entity';
-import { Repository } from 'typeorm';
 import { LoginRequestDto } from 'src/auth/dto/login.request.dto';
 import { AuthService } from 'src/auth/auth.service';
 import { JwtAuthGuard } from '../../auth/jwt/jwt.guard';
 import { CurrentUser } from 'src/common/decorators/user.decorator';
+import { NowUser } from 'src/auth/dto/user.validated.dto';
 
 @Controller('auth')
 @UseInterceptors(SuccessInterceptor) // Response 형태
@@ -28,8 +26,6 @@ export class UsersController {
   constructor(
     private readonly usersService: UsersService,
     private readonly authService: AuthService,
-    @InjectRepository(UserEntity)
-    private readonly usersRepository: Repository<UserEntity>,
   ) {}
 
   @ApiResponse({
@@ -53,9 +49,10 @@ export class UsersController {
     return this.authService.jwtLogin(data);
   }
 
+  @ApiOperation({ summary: '인증 ' })
   @UseGuards(JwtAuthGuard)
   @Post('token/validate')
-  validates(@CurrentUser() user) {
-    return { valid: true, user };
+  validates(@CurrentUser() user: NowUser) {
+    return this.usersService.userValidate(user);
   }
 }
