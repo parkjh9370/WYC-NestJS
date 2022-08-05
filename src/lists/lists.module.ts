@@ -5,7 +5,9 @@ import { BoardEntity } from 'src/borads/infra/entities/boards.entity';
 import { CommentEntity } from 'src/comments/infra/entity/comments.entity';
 import { LikeEntity } from 'src/likes/infra/entity/likes.entity';
 import { UserEntity } from 'src/users/infra/entity/users.entity';
-import { ListsController } from './lists.controller';
+import { ListService } from './application/lists.service';
+import { ListRepository } from './infra/lists.repository';
+import { ListsController } from './presentation/lists.controller';
 
 @Module({
   imports: [
@@ -18,5 +20,6 @@ import { ListsController } from './lists.controller';
     ]),
   ],
   controllers: [ListsController],
+  providers: [ListService, ListRepository],
 })
 export class ListsModule {}

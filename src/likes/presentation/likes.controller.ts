@@ -17,6 +17,9 @@ import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor'
 import { getRepository, Repository } from 'typeorm';
 import { LikeEntity } from '../infra/entity/likes.entity';
 import { LikesService } from '../application/likes.service';
+import { ApiOperation } from '@nestjs/swagger';
+import { NowUser } from 'src/auth/dto/user.validated.dto';
+import { LikeBoardId } from './dto/likes.dto';
 
 @Controller('likes')
 @UseGuards(JwtAuthGuard)
@@ -29,47 +32,21 @@ export class LikesController {
     private readonly likeEntity: Repository<LikeEntity>,
   ) {}
 
-  // 현재 게시글 좋아요 정보
+  @ApiOperation({ summary: '현재 게시글 좋아요 유무' })
   @Get(':id')
-  async getNotLike(@CurrentUser() user, @Param('id') boardId) {
-    // console.log(boardId);
-    // console.log(user);
-    let like = false;
-    getRepository;
-    const isLike = await this.likeEntity.findOne({
-      where: {
-        user: user.id,
-        board: boardId,
-      },
-    });
-
-    if (isLike) {
-      like = true;
-    }
-
-    return { like, message: '게시글의 좋아요 정보 입니다.' };
+  async getNowLike(@CurrentUser() user: NowUser, @Param('id') boardId: string) {
+    return await this.likesService.isNowBoardLike(user, boardId);
   }
 
+  @ApiOperation({ summary: '좋아요 등록' })
   @Post()
-  async addLike(@CurrentUser() user, @Body() boardId) {
-    // console.log(user);
-    // console.log(boardId);
-    const { id } = boardId;
-    await this.likeEntity.save({
-      user: user.id,
-      board: id,
-    });
-    return { message: `좋아요 추가했습니다.` };
+  async addLike(@CurrentUser() user: NowUser, @Body() boardId: LikeBoardId) {
+    return await this.likesService.addLike(user, boardId);
   }
 
+  @ApiOperation({ summary: '좋아요 취소' })
   @Delete()
-  async deleteLike(@CurrentUser() user, @Body() boardId) {
-    const { id } = boardId;
-
-    await this.likeEntity.delete({
-      user: user.id,
-      board: id,
-    });
-    return { message: `좋아요 삭제했습니다.` };
+  async deleteLike(@CurrentUser() user: NowUser, @Body() boardId: LikeBoardId) {
+    return await this.likesService.deleteLike(user, boardId);
   }
 }

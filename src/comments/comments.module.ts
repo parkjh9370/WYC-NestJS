@@ -6,6 +6,7 @@ import { UserEntity } from 'src/users/infra/entity/users.entity';
 import { CommentEntity } from './infra/entity/comments.entity';
 import { CommentService } from './application/comments.service';
 import { CommentsController } from './presentation/comments.controller';
+import { CommentRepository } from './infra/comments.repository';
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { CommentsController } from './presentation/comments.controller';
     forwardRef(() => AuthModule),
   ],
   controllers: [CommentsController],
-  providers: [CommentService],
+  providers: [CommentService, CommentRepository],
   exports: [],
 })
 export class CommentsModule {}
