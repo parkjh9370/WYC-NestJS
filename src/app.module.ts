@@ -19,13 +19,12 @@ import { ListsModule } from './lists/lists.module';
 import { OauthModule } from './oauth/oauth.module';
 
 const typeOrmModuleOptions = {
-  // 함수에 대한 모듈 설정
   useFactory: async (
     configService: ConfigService,
   ): Promise<TypeOrmModuleOptions> => ({
     namingStrategy: new SnakeNamingStrategy(),
     type: 'mysql',
-    host: configService.get('DB_HOST'), // process.env.DB_HOST
+    host: configService.get('DB_HOST'),
     port: configService.get('DB_PORT'),
     username: configService.get('DB_USERNAME'),
     password: configService.get('DB_PASSWORD'),
@@ -38,20 +37,17 @@ const typeOrmModuleOptions = {
       LocationEntity,
       BoardDataEntity,
     ],
-    // db가 모두 지워졌다 생성됨, 배포 단계에서는 false로 설정하고 마이그레이션 해야함
-    synchronize: true, //! set 'false' in production
-    autoLoadEntities: true, // entity 가 자동으로 불러와짐
+    synchronize: true,
+    autoLoadEntities: true,
     logging: false,
-    keepConnectionAlive: true, // 연결 될 때까지 시도
+    keepConnectionAlive: true,
   }),
-  // 의존성 주입, ConfigService.get 으로 환경변수 가져오기 위함
   inject: [ConfigService],
 };
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      // 모든 모듈에서 ConfigModule 사용
       isGlobal: true,
       validationSchema: Joi.object({
         NODE_ENV: Joi.string()

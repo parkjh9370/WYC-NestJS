@@ -16,7 +16,6 @@ export class UsersRepository {
   }
 
   async findUserByIdWithoutPassword(id: string): Promise<UserEntity | null> {
-    // password 제외 된 데이터 가져옴
     const user = await this.usersRepository.findOne({ id });
     return user;
   }

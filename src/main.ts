@@ -46,11 +46,9 @@ class Application {
 
   private setUseStaticAssets() {
     this.server.useStaticAssets(path.join(__dirname, './common', 'uploads'), {
-      // 경로에 media 추가
       prefix: '/media',
     });
   }
-  // http://localhost:8000/media/cats/aaa.png
 
   private setUpOpenAPIMiddleware() {
     SwaggerModule.setup(
