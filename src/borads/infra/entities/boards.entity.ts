@@ -1,26 +1,15 @@
-import { CommonEntity } from '../../../common/entities/common.entity'; // ormconfig.json에서 파싱 가능하도록 상대 경로로 지정
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  JoinTable,
-  ManyToMany,
-  ManyToOne,
-  OneToMany,
-} from 'typeorm';
-// import { VisitorEntity } from '../visitors/visitors.entity';
+import { CommonEntity } from '../../../common/entities/common.entity';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+
 import { UserEntity } from 'src/users/infra/entity/users.entity';
 import { BoardDataEntity } from 'src/borads/infra/entities/board-datas.entity';
 import { LocationEntity } from 'src/borads/infra/entities/locations.entity';
 import { LikeEntity } from 'src/likes/infra/entity/likes.entity';
 import { CommentEntity } from 'src/comments/infra/entity/comments.entity';
-// import { TagEntity } from 'src/tags/tags.entity';
 
 @Entity({
-  // 테이블 명
   name: 'boards',
 })
-// CommonEntitiy 상속
 export class BoardEntity extends CommonEntity {
   @Column({ type: 'varchar', nullable: false })
   title: string;
@@ -36,13 +25,12 @@ export class BoardEntity extends CommonEntity {
 
   //* Relation */
   @ManyToOne(() => UserEntity, (user: UserEntity) => user.board, {
-    onDelete: 'CASCADE', // 사용자가 삭제되면 블로그도 삭제된다.
+    onDelete: 'CASCADE',
   })
   @JoinColumn([
-    // foreignkey 정보들, 연결도 UserEntity 에 대한 정보들을 명시해준다.
     {
-      name: 'userId' /* db에 저장되는 필드 이름 */,
-      referencedColumnName: 'id' /* USER의 id */,
+      name: 'userId',
+      referencedColumnName: 'id',
     },
   ])
   user: UserEntity;

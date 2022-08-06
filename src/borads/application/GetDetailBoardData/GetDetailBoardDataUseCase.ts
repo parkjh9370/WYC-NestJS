@@ -1,30 +1,19 @@
 import { Injectable } from '@nestjs/common';
-import { BoardsRepository } from '../infra/boards.repository';
-import { AddPostDTO } from '../presentation/dto/post.board.request.dto';
+import { BoardsRepository } from 'src/borads/infra/boards.repository';
+import { UseCase } from 'src/common/core/presentation/UseCase';
+import { GetDetailBoardDataUseCaseRequest } from './dto/GetDetailBoardDataUseCaseRequest';
+import { GetDetailBoardDataUseCaseResponse } from './dto/GetDetailBoardDataUseCaseResponse';
 
 @Injectable()
-export class BoardsService {
+export class GetDetailBoardDataUseCase
+  implements
+    UseCase<
+      GetDetailBoardDataUseCaseRequest,
+      GetDetailBoardDataUseCaseResponse
+    >
+{
   constructor(private readonly boardsRepository: BoardsRepository) {}
-
-  async uploadedFilePath(files: Express.Multer.File) {
-    return { location: `http://localhost:8000/media/image/${files.filename}` };
-  }
-
-  async postBoard(user, data: AddPostDTO) {
-    const { title, content, picture, location, siteInfo, rating } = data;
-    const board = await this.boardsRepository.saveBoard(
-      title,
-      content,
-      picture,
-      location,
-      siteInfo,
-      rating,
-      user.id,
-    );
-    return { boardId: board, message: '게시물 생성이 완료되었습니다.' };
-  }
-
-  async getDetailBoard(id: string) {
+  async execute(id: GetDetailBoardDataUseCaseRequest) {
     const boardQuery = await this.boardsRepository.board(id);
 
     const board = {

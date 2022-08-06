@@ -3,16 +3,12 @@ import { BoardEntity } from './entities/boards.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { getRepository, Repository } from 'typeorm';
-import { UserEntity } from '../../users/infra/entity/users.entity';
 import { BoardDataEntity } from './entities/board-datas.entity';
 import { Location, SiteInfo } from '../presentation/dto/post.board.request.dto';
-import { NowUser } from 'src/auth/dto/user.validated.dto';
 
 @Injectable()
 export class BoardsRepository {
   constructor(
-    @InjectRepository(UserEntity)
-    private readonly userEntity: Repository<UserEntity>,
     @InjectRepository(BoardEntity)
     private readonly boardEntitiy: Repository<BoardEntity>,
     @InjectRepository(BoardDataEntity)
@@ -28,11 +24,11 @@ export class BoardsRepository {
     location: Location,
     siteInfo: SiteInfo,
     rating: number,
-    user: NowUser,
+    id,
   ): Promise<string> {
     const board = await this.boardEntitiy
       .save({
-        user,
+        user: id,
         title,
         content,
         picture,
