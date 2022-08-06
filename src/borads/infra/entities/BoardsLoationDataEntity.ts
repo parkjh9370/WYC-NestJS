@@ -1,28 +1,26 @@
 import { CommonEntity } from '../../../common/entities/common.entity';
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
-import { BoardEntity } from 'src/borads/infra/entities/boards.entity';
+
+import { BoardEntity } from 'src/borads/infra/entities/BoardEntity';
 
 @Entity({
-  name: 'boardDatas',
+  name: 'locations',
 })
-export class BoardDataEntity extends CommonEntity {
+export class LocationEntity extends CommonEntity {
   @Column({ type: 'varchar', nullable: false })
-  area: string;
+  latitude: string;
 
   @Column({ type: 'varchar', nullable: false })
-  wifi: string;
-
-  @Column({ type: 'varchar', nullable: false })
-  parking: string;
+  longitude: string;
 
   @Column({ type: 'varchar', nullable: true })
-  electricity: string;
+  roadAdd: string;
 
   @Column({ type: 'varchar', nullable: true })
-  toiletType: string;
+  lotAdd: string;
 
   //* Relation */
-  @ManyToOne(() => BoardEntity, (board: BoardEntity) => board.boardData, {
+  @ManyToOne(() => BoardEntity, (board: BoardEntity) => board.location, {
     onDelete: 'CASCADE',
   })
   @JoinColumn([

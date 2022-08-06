@@ -1,5 +1,5 @@
-import { PostBoardUseCase } from './../application/PostBoardUseCase/PostBoardUseCase';
-import { UploadedBoardPathUseCase } from './../application/UploadedBoardPathUseCase/UploadedBoardPathUseCase';
+import { PostBoardUseCase } from '../application/PostBoardUseCase/PostBoardUseCase';
+import { UploadedBoardPathUseCase } from '../application/UploadedBoardPathUseCase/UploadedBoardPathUseCase';
 import {
   Body,
   Controller,
@@ -54,10 +54,3 @@ export class BoardsController {
     return this.getDetailBoardDataUseCase.execute(id);
   }
 }
-
-/**
- {
-  success:true,
-  data: {"boardId":"11d9a26e-aaa4-427a-85ed-9652db2d6110",
-  message:"게시물 생성이 완료되었습니다."}}
- */

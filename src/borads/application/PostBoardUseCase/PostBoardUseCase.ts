@@ -1,6 +1,6 @@
 import { BoardDataUseCase } from './dto/PostBoardUseCaseRequest';
 import { Injectable } from '@nestjs/common';
-import { BoardsRepository } from 'src/borads/infra/boards.repository';
+import { BoardsRepository } from 'src/borads/infra/BoardRepository';
 
 // 추후 UseCase 지정
 
@@ -18,6 +18,7 @@ export class PostBoardUseCase {
       rating,
       id,
     );
+
     return { boardId: board, message: '게시물 생성이 완료되었습니다.' };
   }
 }

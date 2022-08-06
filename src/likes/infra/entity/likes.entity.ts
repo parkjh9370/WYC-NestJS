@@ -9,7 +9,7 @@ import {
   OneToOne,
 } from 'typeorm';
 import { UserEntity } from 'src/users/infra/entity/users.entity';
-import { BoardEntity } from 'src/borads/infra/entities/boards.entity';
+import { BoardEntity } from 'src/borads/infra/entities/BoardEntity';
 import { CommonEntity } from 'src/common/entities/common.entity';
 
 @Entity({

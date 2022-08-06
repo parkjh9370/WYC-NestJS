@@ -1,13 +1,15 @@
-import { LocationEntity } from './entities/locations.entity';
-import { BoardEntity } from './entities/boards.entity';
-import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { getRepository, Repository } from 'typeorm';
-import { BoardDataEntity } from './entities/board-datas.entity';
-import { Location, SiteInfo } from '../presentation/dto/post.board.request.dto';
+import {
+  Location,
+  SiteInfo,
+} from 'src/borads/presentation/dto/post.board.request.dto';
+import { Repository } from 'typeorm';
+import { BoardRepository } from '../BoardRepository';
+import { BoardEntity } from '../entities/BoardEntity';
+import { BoardDataEntity } from '../entities/BoardsDataEntity';
+import { LocationEntity } from '../entities/BoardsLoationDataEntity';
 
-@Injectable()
-export class BoardsRepository {
+export class MysqlBoardBoardDataLoactionRepository implements BoardRepository {
   constructor(
     @InjectRepository(BoardEntity)
     private readonly boardEntitiy: Repository<BoardEntity>,
@@ -25,7 +27,7 @@ export class BoardsRepository {
     siteInfo: SiteInfo,
     rating: number,
     id,
-  ): Promise<string> {
+  ) {
     const board = await this.boardEntitiy
       .save({
         user: id,
@@ -57,7 +59,7 @@ export class BoardsRepository {
   }
 
   async board(id: string) {
-    return await getRepository(BoardEntity)
+    await this.boardEntitiy
       .createQueryBuilder('board')
       .where({ id: id })
       .select([
@@ -75,13 +77,13 @@ export class BoardsRepository {
   }
 
   async boardData(id: string) {
-    return await getRepository(BoardDataEntity).findOne({
+    await this.boardDataEntity.findOne({
       where: { board: id },
     });
   }
 
   async locationData(id: string) {
-    return await getRepository(LocationEntity).findOne({
+    await this.LocationEntity.findOne({
       where: { board: id },
     });
   }

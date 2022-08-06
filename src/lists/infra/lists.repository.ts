@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { BoardEntity } from 'src/borads/infra/entities/boards.entity';
+import { BoardEntity } from 'src/borads/infra/entities/BoardEntity';
 import { LikeEntity } from 'src/likes/infra/entity/likes.entity';
 import { Repository } from 'typeorm';
 

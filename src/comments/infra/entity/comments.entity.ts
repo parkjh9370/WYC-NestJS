@@ -1,7 +1,7 @@
 import { CommonEntity } from '../../../common/entities/common.entity'; // ormconfig.json에서 파싱 가능하도록 상대 경로로 지정
 import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from 'typeorm';
 import { UserEntity } from 'src/users/infra/entity/users.entity';
-import { BoardEntity } from 'src/borads/infra/entities/boards.entity';
+import { BoardEntity } from 'src/borads/infra/entities/BoardEntity';
 
 @Entity({
   name: 'comments',
