@@ -29,34 +29,34 @@ export class CommentRepository {
       .getMany();
   }
 
-  async registerComment(users, id, comment): Promise<void> {
+  async registerComment(id, boardId, comment): Promise<void> {
     await this.commentsRepository.save({
-      user: users.id,
-      board: id,
+      user: id,
+      board: boardId,
       comment: comment,
     });
   }
 
-  async putComment(user, id, data): Promise<void> {
+  async putComment(id, boardId, data): Promise<void> {
     await getRepository(CommentEntity)
       .createQueryBuilder()
       .update({
         comment: data.comment,
       })
       .where({
-        user: user.id,
-        id: id,
+        user: id,
+        id: boardId,
       })
       .execute();
   }
 
-  async deleteComment(user, id) {
+  async deleteComment(id, boardId) {
     return await getRepository(CommentEntity)
       .createQueryBuilder()
       .delete()
       .where({
-        user: user.id,
-        id: id,
+        user: id,
+        id: boardId,
       })
       .execute();
   }

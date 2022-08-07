@@ -23,9 +23,11 @@ export class GetDetailBoardDataUseCase
   ) {}
   async execute(id: GetDetailBoardDataUseCaseRequest) {
     const boardQuery = await this.boardsRepository.board(id);
-    // const boardQuery = await this.boardRepository.board(id);
+    const boardQuery1 = await this.boardRepository.board(id);
+    console.log(boardQuery1);
 
     console.log(boardQuery);
+
     const board = {
       ...boardQuery,
       nickname: `${boardQuery.user.nickname}`,

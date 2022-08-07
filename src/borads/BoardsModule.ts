@@ -31,10 +31,10 @@ import { GetDetailBoardDataUseCase } from './application/GetDetailBoardData/GetD
   ],
   controllers: [BoardsController],
   providers: [
-    BoardsRepository,
     UploadedBoardPathUseCase,
     PostBoardUseCase,
     GetDetailBoardDataUseCase,
+    BoardsRepository,
     {
       provide: BOARD_BOARDDATA_LOCATION_REPOSITORY,
       useClass: MysqlBoardBoardDataLoactionRepository,

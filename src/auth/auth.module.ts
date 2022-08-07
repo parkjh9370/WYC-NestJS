@@ -8,7 +8,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { UsersModule } from 'src/users/users.module';
 import { BoradsModule } from 'src/borads/BoardsModule';
 import { LikesModule } from 'src/likes/likes.module';
-import { CommentsModule } from 'src/comments/comments.module';
+import { CommentsModule } from 'src/comments/CommenetModule';
 
 @Module({
   imports: [
