@@ -1,73 +1,87 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# 🏕️ WYC - NestJS API (08.02 ~)
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+### 🔎 토이 프로젝트 설명
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- 기존 Node.js 구축한 WYC 프로젝트 서버를 **Nest.js** 로 변경
 
-## Description
+&nbsp;
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### 🖥 설치 및 실행
 
-## Installation
-
-```bash
+```
 $ npm install
-```
-
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
 $ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
-## Test
+&nbsp;
 
-```bash
-# unit tests
-$ npm run test
+### 🤫 얻고자 하는 바
 
-# e2e tests
-$ npm run test:e2e
+- NestJS DI 프레임워크 활용방법과 **_Module, Controller, Provider의 상관관계_** 를 이해하고 OOP 적용
+- NestJS에서 제공해주는 interface인 **_Filter, Pipes, Guards, Interceptor, decorator_** 를 적용해 Request lifecycle 이해
+- DDD(Domain Driven Development) 방식을 적용하여 class간 커플링을 최소화 하고, 테스트가 용이한 환경을 제공
 
-# test coverage
-$ npm run test:cov
-```
+---
 
-## Support
+&nbsp;
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### ✅ API (현재까지 구현한 기능)
 
-## Stay in touch
+#### 1. 유저 - API
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- 회원가입, 일반 로그인
+- 카카오 로그인
 
-## License
+#### 2. 게시글 - API
 
-Nest is [MIT licensed](LICENSE).
+- 사진 업로드 (Multer, form-data 처리, 서버에 파일 저장 )
+- 게시글 등록 (게시글, 추가 옵션, 위치 데이터)
+- 메인/상세 페이지 데이터 제공
+
+#### 3. 댓글, 좋아요 - API
+
+- 댓글, 좋아요 CRUD
+
+&nbsp;
+
+> 📌 NestJS Interface
+>
+> - Middleware : 요청, 응답 로깅 (ip, method, statusCode, url)
+> - Guard : 로그인 유저 토큰 인증 (+ JWT 토큰)
+> - decorator(user) : 인증된 토큰으로 유저 데이터 추출 (Custom)
+> - interceptors : 요청 성공 시 응 응답 형태
+> - Exception filters : 요청 실패 시 응답 에러 Response Code, 메세지
+
+&nbsp;
+
+---
+
+&nbsp;
+
+### ❗ 어려웠던점
+
+- NestJS 프레임워크, 객체 지향 프로그래밍 방식(+DI) 타입스크립트 문법에 대한 이해 (+ TypeORM)
+
+- 기존 Node.js의 함수형 프로그래밍 방식에서 벗어나 Nest.js의 DI 프레임워크, interface를 활용해 요청, 응답 데이터와 로직을 핸들링하고 처리하는 부분
+
+- 데이터와 에러 처리 응답 형태가 달라짐에 따른 프론트엔드 코드 수정
+
+&nbsp;
+
+### 💪 배운점
+
+- 프로젝트 규모가 커질수록 도메인 역할을 분리함으로써, 이에 대해 빠르게 파악할 수 있고, 유지/보수에 용이하다.
+
+- Request, Response, Data Transter 과정에서 객체 간의 역할과 책임을 세분화, 규격화 시킬수록 Side Effect를 최소화 시키고 탄탄한 백엔드 서버를 구축할 수 있다.
+
+&nbsp;
+
+### 💡 현재까지 느낀점
+
+대부분 처음 접하고 적용해보는 내용인만큼 생각지 못한 에러도 많이 만나고 쉽지 않다.
+
+하지만 직접 코드를 작성해보면서 문서에서만 접했던 Nestjs, OOP 등의 장점을 조금이나마 이해할 수 있었던 것같다.
+
+익숙해 질 수 있도록 코드를 많이 보고 작성해봐야 겠다는 것을 느꼈고,
+
+DDD 패턴은 모두 적용해보지 못했는데 지속적으로 이해하고 코드를 작성해 나가봐야 겠다.
