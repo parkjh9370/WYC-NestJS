@@ -44,7 +44,7 @@ $ npm run start:dev
 
 &nbsp;
 
-> 📌 NestJS Interface
+> 📌 Common Request Lifecycle
 >
 > - Middleware : 요청, 응답 로깅 (ip, method, statusCode, url)
 > - Guard : 로그인 유저 토큰 인증 (+ JWT 토큰)
