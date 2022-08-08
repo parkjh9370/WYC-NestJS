@@ -59,7 +59,7 @@ export class MysqlBoardBoardDataLoactionRepository implements BoardRepository {
   }
 
   async board(id: string) {
-    await this.boardEntitiy
+    return await this.boardEntitiy
       .createQueryBuilder('board')
       .where({ id: id })
       .select([
@@ -77,13 +77,13 @@ export class MysqlBoardBoardDataLoactionRepository implements BoardRepository {
   }
 
   async boardData(id: string) {
-    await this.boardDataEntity.findOne({
+    return await this.boardDataEntity.findOne({
       where: { board: id },
     });
   }
 
   async locationData(id: string) {
-    await this.LocationEntity.findOne({
+    return await this.LocationEntity.findOne({
       where: { board: id },
     });
   }

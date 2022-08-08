@@ -9,10 +9,7 @@ import { AuthModule } from 'src/auth/auth.module';
 import { UserEntity } from 'src/users/infra/entity/users.entity';
 import { BoardsController } from './presentation/BoardsController';
 import { BoardEntity } from './infra/entities/BoardEntity';
-import {
-  BoardsRepository,
-  BOARD_BOARDDATA_LOCATION_REPOSITORY,
-} from './infra/BoardRepository';
+import { BOARD_BOARDDATA_LOCATION_REPOSITORY } from './infra/BoardRepository';
 import { UploadedBoardPathUseCase } from './application/UploadedBoardPathUseCase/UploadedBoardPathUseCase';
 import { GetDetailBoardDataUseCase } from './application/GetDetailBoardData/GetDetailBoardDataUseCase';
 
@@ -34,7 +31,6 @@ import { GetDetailBoardDataUseCase } from './application/GetDetailBoardData/GetD
     UploadedBoardPathUseCase,
     PostBoardUseCase,
     GetDetailBoardDataUseCase,
-    BoardsRepository,
     {
       provide: BOARD_BOARDDATA_LOCATION_REPOSITORY,
       useClass: MysqlBoardBoardDataLoactionRepository,

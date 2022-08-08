@@ -1,15 +1,3 @@
-// BoardDataEntity {
-//   id: '079891b2-d884-4886-8fb1-faa235899eea',
-//   createdAt: 2022-08-06T11:24:15.059Z,
-//   updatedAt: 2022-08-06T11:24:15.059Z,
-//   deletedAt: null,
-//   area: '서울',
-//   wifi: '가능',
-//   parking: '여유',
-//   electricity: '가능',
-//   toiletType: '양호'
-// }
-
 import { AggregateRoot } from 'src/common/core/domain/AggregateRoot';
 import { Result } from 'src/common/core/presentation/Result';
 

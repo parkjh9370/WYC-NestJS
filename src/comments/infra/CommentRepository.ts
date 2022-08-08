@@ -1,8 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { NowUser } from 'src/auth/dto/user.validated.dto';
 import { getRepository, Repository } from 'typeorm';
 import { CommentEntity } from './entity/comments.entity';
+
+export const COMMENT_REPOSITORY = Symbol('COMMENT_REPOSITORY');
+
+export interface CommentsRepository {
+  findNowBoardComments(id: string): Promise<string>;
+  registerComment(id: string): Promise<void>;
+  putComment(id: string): Promise<void>;
+  deleteComment(id: string): Promise<void>;
+}
 
 @Injectable()
 export class CommentRepository {
@@ -12,7 +20,7 @@ export class CommentRepository {
   ) {}
 
   async findNowBoardComments(id: string) {
-    return await getRepository(CommentEntity)
+    return await this.commentsRepository
       .createQueryBuilder('comment')
       .where({ board: id })
       .select([

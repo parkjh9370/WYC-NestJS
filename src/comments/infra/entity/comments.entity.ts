@@ -11,25 +11,23 @@ export class CommentEntity extends CommonEntity {
   comment: string;
 
   @ManyToOne(() => UserEntity, (user: UserEntity) => user.comment, {
-    onDelete: 'CASCADE', // 사용자가 삭제되면 블로그도 삭제된다.
+    onDelete: 'CASCADE',
   })
   @JoinColumn([
-    // foreignkey 정보들, 연결도 UserEntity 에 대한 정보들을 명시해준다.
     {
-      name: 'userId' /* db에 저장되는 필드 이름 */,
-      referencedColumnName: 'id' /* USER의 id */,
+      name: 'userId',
+      referencedColumnName: 'id',
     },
   ])
   user: UserEntity;
 
   @ManyToOne(() => BoardEntity, (board: BoardEntity) => board.comment, {
-    onDelete: 'CASCADE', // 사용자가 삭제되면 블로그도 삭제된다.
+    onDelete: 'CASCADE',
   })
   @JoinColumn([
-    // foreignkey 정보들, 연결도 UserEntity 에 대한 정보들을 명시해준다.
     {
-      name: 'boardId' /* db에 저장되는 필드 이름 */,
-      referencedColumnName: 'id' /* USER의 id */,
+      name: 'boardId',
+      referencedColumnName: 'id',
     },
   ])
   board: BoardEntity;

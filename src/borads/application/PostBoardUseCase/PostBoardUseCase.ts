@@ -1,15 +1,21 @@
 import { BoardDataUseCase } from './dto/PostBoardUseCaseRequest';
-import { Injectable } from '@nestjs/common';
-import { BoardsRepository } from 'src/borads/infra/BoardRepository';
+import { Inject, Injectable } from '@nestjs/common';
+import {
+  BoardRepository,
+  BOARD_BOARDDATA_LOCATION_REPOSITORY,
+} from 'src/borads/infra/BoardRepository';
 
 // 추후 UseCase 지정
 
 @Injectable()
 export class PostBoardUseCase {
-  constructor(private readonly boardsRepository: BoardsRepository) {}
+  constructor(
+    @Inject(BOARD_BOARDDATA_LOCATION_REPOSITORY)
+    private readonly boardRepository: BoardRepository,
+  ) {}
   async execute(id: string, data: BoardDataUseCase) {
     const { title, content, picture, location, siteInfo, rating } = data;
-    const board = await this.boardsRepository.saveBoard(
+    const board = await this.boardRepository.saveBoard(
       title,
       content,
       picture,

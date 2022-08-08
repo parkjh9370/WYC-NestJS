@@ -39,7 +39,7 @@ export class BoardEntity extends CommonEntity {
     () => BoardDataEntity,
     (boardData: BoardDataEntity) => boardData.board,
     {
-      cascade: true, // 사용자를 통해 블로그가 추가, 수정, 삭제되고 사용자가 저장되면 추가된 블로그도 저장된다.
+      cascade: true,
     },
   )
   boardData: BoardDataEntity[];

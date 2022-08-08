@@ -1,8 +1,10 @@
 import { CommentRepository } from '../../infra/CommentRepository';
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { UseCase } from 'src/common/core/presentation/UseCase';
 import { GetNowBoardCommentUseCaseRequest } from './dto/GetNowBoardCommentUseCaseRequest';
 import { GetNowBoardCommentUseCaseResponse } from './dto/GetNowBoardCommentUseCaseResponse';
+import { REGISTER_COMMENT_REPOSITORY } from 'src/comments/infra/RegisterCommentRepository';
+import { MysqlfindNowBoardCommentsRespository } from 'src/comments/infra/mysql/MysqlfindNowBoardCommentsRespository';
 
 @Injectable()
 export class GetNowBoardCommentUseCase
@@ -12,12 +14,19 @@ export class GetNowBoardCommentUseCase
       Promise<GetNowBoardCommentUseCaseResponse[]>
     >
 {
-  constructor(private readonly commentRepository: CommentRepository) {}
+  constructor(
+    private readonly commentRepository: CommentRepository,
+    @Inject(REGISTER_COMMENT_REPOSITORY)
+    private readonly mysqlfindNowBoardCommentsRepository: MysqlfindNowBoardCommentsRespository,
+  ) {}
 
   async execute(
     id: GetNowBoardCommentUseCaseRequest,
   ): Promise<GetNowBoardCommentUseCaseResponse[]> {
     const commentQuery = await this.commentRepository.findNowBoardComments(id);
+    const commentQuery1 =
+      await this.mysqlfindNowBoardCommentsRepository.findNowBoardComment(id);
+    // console.log(commentQuery1);
 
     const comment = commentQuery.map((comment) => {
       return {
