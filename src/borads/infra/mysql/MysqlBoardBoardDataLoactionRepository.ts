@@ -1,4 +1,5 @@
 import { InjectRepository } from '@nestjs/typeorm';
+import { Board } from 'src/borads/domain/Board';
 import {
   Location,
   SiteInfo,
@@ -8,6 +9,7 @@ import { BoardRepository } from '../BoardRepository';
 import { BoardEntity } from '../entities/BoardEntity';
 import { BoardDataEntity } from '../entities/BoardsDataEntity';
 import { LocationEntity } from '../entities/BoardsLoationDataEntity';
+import { MysqlBoardBoardDataLoactionRepositoryMapper } from './mapper/MysqlBoardBoardDataLoactionRepositoryMapper';
 
 export class MysqlBoardBoardDataLoactionRepository implements BoardRepository {
   constructor(
@@ -59,6 +61,28 @@ export class MysqlBoardBoardDataLoactionRepository implements BoardRepository {
   }
 
   async board(id: string) {
+    // const test1 = await this.boardEntitiy
+    //   .createQueryBuilder('board')
+    //   .where({ id: id })
+    //   .select([
+    //     'board.id',
+    //     'user.nickname',
+    //     'user.profile',
+    //     'board.title',
+    //     'board.content',
+    //     'board.picture',
+    //     'board.rating',
+    //     'board.createdAt',
+    //   ])
+    //   .leftJoin('board.user', 'user')
+    //   .getOne();
+    // console.log(test1);
+
+    // const test =
+    //   await MysqlBoardBoardDataLoactionRepositoryMapper.toDomainBoard(test1);
+
+    // console.log(test.value.props);
+
     return await this.boardEntitiy
       .createQueryBuilder('board')
       .where({ id: id })
@@ -74,6 +98,26 @@ export class MysqlBoardBoardDataLoactionRepository implements BoardRepository {
       ])
       .leftJoin('board.user', 'user')
       .getOne();
+
+    // const getBoard = await this.boardEntitiy
+    // .createQueryBuilder('board')
+    // .where({ id: id })
+    // .select([
+    //   'board.id',
+    //   'user.nickname',
+    //   'user.profile',
+    //   'board.title',
+    //   'board.content',
+    //   'board.picture',
+    //   'board.rating',
+    //   'board.createdAt',
+    // ])
+    // .leftJoin('board.user', 'user')
+    // .getOne();
+
+    // return Board.create({
+
+    // })
   }
 
   async boardData(id: string) {

@@ -12,17 +12,17 @@ export interface BoardLocationProps {
   lotAdd: string;
 }
 
-export class BoardLocation extends AggregateRoot<BoardLocationProps, string> {
-  private constructor(props: BoardLocationProps, id: string) {
-    super(props, id);
+export class BoardLocation extends AggregateRoot<BoardLocationProps> {
+  private constructor(props: BoardLocationProps) {
+    super(props);
   }
 
-  static create(props: BoardLocationProps, id: string): Result<BoardLocation> {
-    return Result.ok(new BoardLocation(props, id));
+  static create(props: BoardLocationProps): Result<BoardLocation> {
+    return Result.ok(new BoardLocation(props));
   }
 
   static createNew(props: BoardLocationProps): Result<BoardLocation> {
-    return this.create({ ...props }, '0');
+    return this.create({ ...props });
   }
 
   get id(): string {

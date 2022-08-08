@@ -62,4 +62,5 @@ export class BoardEntity extends CommonEntity {
     cascade: true,
   })
   comment: CommentEntity[];
+  static id: string;
 }

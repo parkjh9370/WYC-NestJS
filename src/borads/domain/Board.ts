@@ -16,17 +16,17 @@ interface UserNameProfile {
   profile: string;
 }
 
-export class Board extends AggregateRoot<BoardProps, string> {
-  private constructor(props: BoardProps, id: string) {
-    super(props, id);
+export class Board extends AggregateRoot<BoardProps> {
+  private constructor(props: BoardProps) {
+    super(props);
   }
 
-  static create(props: BoardProps, id: string): Result<Board> {
-    return Result.ok(new Board(props, id));
+  static create(props: BoardProps): Result<Board> {
+    return Result.ok(new Board(props));
   }
 
   static createNew(props: BoardProps): Result<Board> {
-    return this.create({ ...props }, '0');
+    return this.create({ ...props });
   }
 
   get id(): string {

@@ -14,7 +14,7 @@ export interface BoardRepository {
     rating: number,
     id,
   ): Promise<string>;
-  board(id: string): Promise<any>;
+  board(id: string);
   boardData(id: string): Promise<any>;
   locationData(id: string): Promise<any>;
 }

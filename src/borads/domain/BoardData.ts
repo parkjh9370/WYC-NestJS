@@ -13,9 +13,9 @@ export interface BoardDataProps {
   toiletType: string;
 }
 
-export class BoardData extends AggregateRoot<BoardDataProps, string> {
+export class BoardData extends AggregateRoot<BoardDataProps> {
   private constructor(props: BoardDataProps, id: string) {
-    super(props, id);
+    super(props);
   }
 
   static create(props: BoardDataProps, id: string): Result<BoardData> {
