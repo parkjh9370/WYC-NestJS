@@ -4,7 +4,7 @@ import { UseCase } from 'src/common/core/presentation/UseCase';
 import { GetNowBoardCommentUseCaseRequest } from './dto/GetNowBoardCommentUseCaseRequest';
 import { GetNowBoardCommentUseCaseResponse } from './dto/GetNowBoardCommentUseCaseResponse';
 import { REGISTER_COMMENT_REPOSITORY } from 'src/comments/infra/RegisterCommentRepository';
-import { MysqlfindNowBoardCommentsRespository } from 'src/comments/infra/mysql/MysqlfindNowBoardCommentsRespository';
+import { FindNowBoardCommentsRepository } from 'src/comments/infra/FindNowBoardCommentsRepository';
 
 @Injectable()
 export class GetNowBoardCommentUseCase
@@ -17,16 +17,21 @@ export class GetNowBoardCommentUseCase
   constructor(
     private readonly commentRepository: CommentRepository,
     @Inject(REGISTER_COMMENT_REPOSITORY)
-    private readonly mysqlfindNowBoardCommentsRepository: MysqlfindNowBoardCommentsRespository,
+    private readonly findNowBoardCommentsRepository: FindNowBoardCommentsRepository,
   ) {}
 
   async execute(
     id: GetNowBoardCommentUseCaseRequest,
   ): Promise<GetNowBoardCommentUseCaseResponse[]> {
     const commentQuery = await this.commentRepository.findNowBoardComments(id);
-    const commentQuery1 =
-      await this.mysqlfindNowBoardCommentsRepository.findNowBoardComment(id);
-    // console.log(commentQuery1);
+
+    // try {
+    //   const test =
+    //     await this.findNowBoardCommentsRepository.findNowBoardComments(id);
+    //   console.log(test);
+    // } catch (err) {
+    //   console.log(err);
+    // }
 
     const comment = commentQuery.map((comment) => {
       return {

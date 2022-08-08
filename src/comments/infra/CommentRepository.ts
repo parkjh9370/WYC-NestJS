@@ -36,36 +36,4 @@ export class CommentRepository {
       .orderBy({ 'comment.createdAt': 'DESC' })
       .getMany();
   }
-
-  async registerComment(id, boardId, comment): Promise<void> {
-    await this.commentsRepository.save({
-      user: id,
-      board: boardId,
-      comment: comment,
-    });
-  }
-
-  async putComment(id, boardId, data): Promise<void> {
-    await getRepository(CommentEntity)
-      .createQueryBuilder()
-      .update({
-        comment: data.comment,
-      })
-      .where({
-        user: id,
-        id: boardId,
-      })
-      .execute();
-  }
-
-  async deleteComment(id, boardId) {
-    return await getRepository(CommentEntity)
-      .createQueryBuilder()
-      .delete()
-      .where({
-        user: id,
-        id: boardId,
-      })
-      .execute();
-  }
 }

@@ -26,11 +26,15 @@ import { MysqldeleteComment } from './infra/mysql/MysqldeleteComment';
   ],
   controllers: [CommentsController],
   providers: [
-    CommentRepository,
     GetNowBoardCommentUseCase,
     PostCommentUseCase,
     ModifyCommentUseCase,
     DeleteCommentUseCase,
+    CommentRepository,
+    {
+      provide: FIND_NOW_BOARD_COMMENT_REPOSITORY,
+      useClass: MysqlfindNowBoardCommentsRespository,
+    },
     {
       provide: REGISTER_COMMENT_REPOSITORY,
       useClass: MysqlregisterCommentRepository,
@@ -39,10 +43,7 @@ import { MysqldeleteComment } from './infra/mysql/MysqldeleteComment';
       provide: PUT_COMMENT_REPOSITORY,
       useClass: MysqlputCommentRepository,
     },
-    {
-      provide: FIND_NOW_BOARD_COMMENT_REPOSITORY,
-      useClass: MysqlfindNowBoardCommentsRespository,
-    },
+
     {
       provide: DELETE_COMMENT_REPOSITORY,
       useClass: MysqldeleteComment,

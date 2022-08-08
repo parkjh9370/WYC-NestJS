@@ -1,18 +1,22 @@
-import { Injectable } from '@nestjs/common';
-import { CommentRepository } from 'src/comments/infra/CommentRepository';
-import { UseCase } from 'src/common/core/presentation/UseCase';
-import { DeleteCommentUseCaseRequest } from './dto/DeleteCommentUseCaseRequest';
+import { Inject, Injectable } from '@nestjs/common';
+import {
+  DeleteCommentRepository,
+  DELETE_COMMENT_REPOSITORY,
+} from 'src/comments/infra/DeleteCommentRepository';
 import { DeleteCommentUseCaseResponse } from './dto/DeleteCommentUseCaseResponse';
 
 @Injectable()
 export class DeleteCommentUseCase {
-  constructor(private readonly commentRepository: CommentRepository) {}
+  constructor(
+    @Inject(DELETE_COMMENT_REPOSITORY)
+    private readonly deleteCommentRepository: DeleteCommentRepository,
+  ) {}
 
   async execute(
     id: string,
     boardId: string,
   ): Promise<DeleteCommentUseCaseResponse> {
-    await this.commentRepository.deleteComment(id, boardId);
+    await this.deleteCommentRepository.deleteComment(id, boardId);
     return { message: '댓글이 삭제되었습니다.' };
   }
 }

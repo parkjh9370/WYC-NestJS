@@ -10,12 +10,11 @@ export class MysqlfindNowBoardCommentsRespository
 {
   constructor(
     @InjectRepository(CommentEntity)
-    private readonly findNowBoardCommentsRespository: Repository<CommentEntity>,
+    private readonly findNowBoardCommentRespository: Repository<CommentEntity>,
   ) {}
 
-  async findNowBoardComment(id: string) {
-    console.log('klakla');
-    return await this.findNowBoardCommentsRespository
+  async findNowBoardComments(id: string) {
+    return await this.findNowBoardCommentRespository
       .createQueryBuilder('comment')
       .where({ board: id })
       .select([
@@ -30,5 +29,10 @@ export class MysqlfindNowBoardCommentsRespository
       .leftJoin('comment.user', 'user')
       .orderBy({ 'comment.createdAt': 'DESC' })
       .getMany();
+  }
+
+  async test() {
+    console.log('any');
+    return;
   }
 }
