@@ -17,7 +17,6 @@ import { LikeEntity } from './likes/infra/entity/likes.entity';
 import { CommentsModule } from './comments/CommenetModule';
 import { ListsModule } from './lists/lists.module';
 import { OauthModule } from './oauth/oauth.module';
-// import { AffiliatesModule } from './affiliates/AffiliatesModule';
 
 const typeOrmModuleOptions = {
   useFactory: async (
@@ -72,7 +71,6 @@ const typeOrmModuleOptions = {
     CommentsModule,
     ListsModule,
     OauthModule,
-    // AffiliatesModule,
   ],
   controllers: [AppController],
   providers: [],

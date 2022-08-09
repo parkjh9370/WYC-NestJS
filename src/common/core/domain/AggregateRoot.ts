@@ -2,18 +2,21 @@ interface AggregateObjectProps {
   [index: string]: any;
 }
 
-export abstract class AggregateRoot<T extends AggregateObjectProps> {
+export abstract class AggregateRoot<
+  T extends AggregateObjectProps,
+  U = number,
+> {
   public props: T;
-  // protected readonly _id?: U;
+  protected readonly _id: U;
 
-  protected constructor(props: T) {
+  protected constructor(props: T, id: U) {
     this.props = { ...props };
-    // this._id = id;
+    this._id = id;
   }
 
-  // get id(): U {
-  //   return this._id as U;
-  // }
+  get id(): U {
+    return this._id as U;
+  }
 }
 
 /**
