@@ -23,10 +23,7 @@ module.exports = {
    * 기반(base) 설정으로 활용 가능
    * 즉, 추천 설정을 활용해 손쉽게 세팅이 가능하다.
    */
-  extends: [
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
-  ],
+  extends: ['plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
   /** root
    * Eslint 설정 시 여러 개 설정 파일 사용 가능
    * 특히 Monorepo와 같이 하나의 코드 저장소에 여러개 프로젝트가 공존하는 경우
@@ -55,12 +52,46 @@ module.exports = {
    *  새로운 규칙을 추가하고 싶을 때 사용
    */
   rules: {
-    '@typescript-eslint/interface-name-prefix': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
+    // '@typescript-eslint/interface-name-prefix': [true, 'always-prefix'],s
+    '@typescript-eslint/explicit-function-return-type': 'off', // 함수 선언 시 return 안하면 에러
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
-    // '@typescript-eslint/'
+    // '@typescript-eslint/quotes': [
+    //   // 싱글 quotes, 백틱, ${} 허용 prettier "singleQuote": true,
+    //   'error',
+    //   'single',
+    //   {
+    //     allowTemplateLiterals: false,
+    //   },
+    // ],
+    // 'prettier/prettier': [
+    //   'error',
+    //   {
+    //     singleQuote: true,
+    //     parser: 'flow',
+    //   },
+    // ],
+    // '@typescript-eslint/no-unused-vars': ['error'], // 사용된 클래스, interface 등 선언해두고 사용하지 않으면 에러
+    // '@typescript-eslint/naming-convention': [
+    //   // interface 선언 시 I를 접두사로 붙여야함
+    //   'error',
+    //   {
+    //     selector: 'interface',
+    //     format: ['PascalCase'],
+    //     custom: {
+    //       regex: '^I',
+    //       match: true,
+    //     },
+    //   },
+    // ],
   },
+  // 'prettier/prettier': [
+  //   'error',
+  //   {
+  //     singleQuote: true,
+  //     parser: 'flow',
+  //   },
+  // ],
 };
 
 /** settings 옵션
@@ -82,3 +113,6 @@ module.exports = {
  */
 
 // https://typescript-eslint.io/rules/prefer-return-this-type
+//https://eslint.org/docs/latest/rules/comma-dangle
+
+// vscode 자체 프리티어 끄기 editor format on save'

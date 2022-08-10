@@ -1,14 +1,11 @@
-import {
-  ClassSerializerInterceptor,
-  Logger,
-  ValidationPipe,
-} from '@nestjs/common';
+import { ClassSerializerInterceptor, Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import * as expressBasicAuth from 'express-basic-auth';
 import { HttpExceptionFilter } from './common/exceptions/http-api-exception.filter';
+
 import * as path from 'path';
 
 class Application {
@@ -79,9 +76,7 @@ class Application {
       }),
     );
     // 엔티티 설계 시 @Exclude 데코레이터를 통해 데이터 반환 받을 시 해당 인자는 빼줄 수 있다.
-    this.server.useGlobalInterceptors(
-      new ClassSerializerInterceptor(this.server.get(Reflector)),
-    );
+    this.server.useGlobalInterceptors(new ClassSerializerInterceptor(this.server.get(Reflector)));
     this.server.useGlobalFilters(new HttpExceptionFilter());
   }
 
