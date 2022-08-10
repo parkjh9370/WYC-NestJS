@@ -32,7 +32,7 @@ export class UserEntity extends CommonEntity {
   @IsString()
   @Column({
     type: 'varchar',
-    default: 'http://localhost:8000/media/image/defalut1659601515523.png',
+    default: 'http://localhost:8000/media/image/12345.png',
   })
   profile: string;
 
